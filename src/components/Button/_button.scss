@@ -1,0 +1,28 @@
+/* Button styles
+------------------ */
+.button {
+  &-round {
+    color: #fff;
+    background-color: #ff57a2;
+    border-radius: 2rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  &-rect {
+    color: #3a3d57;
+    background-color: #14cc76;
+    border-bottom: 0.25rem solid #37945c;
+    margin: 0 0 16px;
+    padding: 0.25em 1.5em;
+    transition: background-color 0.25s ease-out;
+
+    &:hover {
+      background-color: #41e592;
+    }
+  }
+
+  &-arrow {
+    font-size: 1.5rem;
+    color: white;
+  }
+}

@@ -1,0 +1,112 @@
+/* Importing fonts
+------------------------------- */
+
+@font-face {
+  font-family: "BoosterNextFY";
+  src: url("/src/fonts/BoosterNextFY-Thin.woff2") format("woff2"),
+    url("/src/fonts/BoosterNextFY-Thin.woff") format("woff");
+  font-weight: 100; /* Thin */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BoosterNextFY";
+  src: url("/src/fonts/BoosterNextFY-Light.woff2") format("woff2"),
+    url("/src/fonts/BoosterNextFY-Light.woff") format("woff");
+  font-weight: 300; /* Light */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BoosterNextFY";
+  src: url("/src/fonts/BoosterNextFY-Regular.woff2") format("woff2"),
+    url("/src/fonts/BoosterNextFY-Regular.woff") format("woff");
+  font-weight: 400; /* Regular */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BoosterNextFY";
+  src: url("/src/fonts/BoosterNextFY-Medium.woff2") format("woff2"),
+    url("/src/fonts/BoosterNextFY-Medium.woff") format("woff");
+  font-weight: 500; /* Medium */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BoosterNextFY";
+  src: url("/src/fonts/BoosterNextFY-Bold.woff2") format("woff2"),
+    url("/src/fonts/BoosterNextFY-Bold.woff") format("woff");
+  font-weight: bold; /* Bold */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "BoosterNextFY";
+  src: url("/src/fonts/BoosterNextFY-Black.woff2") format("woff2"),
+    url("/src/fonts/BoosterNextFY-Black.woff") format("woff");
+  font-weight: 900; /* Black */
+  font-style: normal;
+}
+/* Importing fonts end*/
+/*------------------------------------------------------*/
+
+/* Typography styles
+---------------------------------------- */
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: "BoosterNextFY", sans-serif;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #fff;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 1.5rem 0 1.38rem;
+  font-family: "BoosterNextFY", sans-serif;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 2.75rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 2.25rem;
+}
+
+h4 {
+  font-size: 1.75rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+small {
+  font-size: 0.8rem;
+}
+
+/* Typography styles end */
+/*------------------------------------------------------*/

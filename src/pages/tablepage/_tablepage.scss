@@ -1,0 +1,65 @@
+/* TablePage styles
+------------------- */
+.tablepage {
+  padding: 2rem 0;
+  z-index: 10;
+  width: 100%;
+  border-collapse: collapse;
+
+  &__head {
+    background-color: #333;
+  }
+
+  &__body {
+    &-row {
+      &:nth-of-type(odd) {
+        background-color: #3a3d57;
+      }
+
+      &:nth-of-type(even) {
+        background-color: #4e5168;
+      }
+    }
+  }
+
+  &__row {
+    border-bottom: 0.1rem solid #fff;
+
+    th,
+    td {
+      width: 20%;
+      text-align: start;
+      padding: 0.625rem 1rem;
+      min-width: 10rem;
+    }
+
+    &--active {
+      background-color: #fff !important;
+      color: #333;
+    }
+  }
+}
+
+// Detailed table row
+.detailed {
+  background-color: white;
+  width: 100%;
+  max-height: 10rem;
+  color: #333;
+
+  &__data {
+    display: flex;
+    padding: 0 1rem 0;
+
+    &-image {
+      width: 13rem;
+      height: 13rem;
+      object-fit: cover;
+      margin: 0.5rem 1rem 0 0;
+    }
+
+    &--texts {
+      display: flex;
+    }
+  }
+}

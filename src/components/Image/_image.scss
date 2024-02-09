@@ -1,0 +1,55 @@
+/* Image component
+---------------------- */
+.image {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  margin: 2rem 0;
+
+  &:hover .image__effect-bg,
+  &:hover img,
+  &:focus .image__effect-bg,
+  &:focus img {
+    transform: scale(1.1);
+  }
+
+  &__effect {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
+    &-bg {
+      width: 100%;
+      height: 100%;
+
+      // background-image: url("https://images.unsplash.com/photo-1682685797741-f0213d24418c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+      background-position: center;
+      background-size: cover;
+      transition: transform 0.2s ease-in-out;
+
+      filter: blur(5px);
+    }
+  }
+
+  &__info {
+    background-color: hsla(0, 0%, 0%, 50%);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+    z-index: 10;
+    width: 100%;
+    padding: 0.25rem 2rem;
+  }
+
+  img {
+    transition: transform 0.2s ease-in-out;
+
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+  }
+}

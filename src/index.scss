@@ -1,0 +1,10 @@
+@import "./scss/reset";
+@import "./scss/typography";
+@import "./scss/app";
+/* Components */
+@import "./components/Button/button";
+@import "./components/Image/image";
+@import "./components/Pagination/pagination";
+/* Pages */
+@import "./pages/articlepage/articlepage";
+@import "./pages/tablepage/tablepage";
