@@ -8,10 +8,16 @@
 
   &__head {
     background-color: #333;
+
+    &-title {
+      cursor: pointer;
+    }
   }
 
   &__body {
     &-row {
+      cursor: pointer;
+
       &:nth-of-type(odd) {
         background-color: #3a3d57;
       }

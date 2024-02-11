@@ -17,39 +17,54 @@ const TablePage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [sortColumn, setSortColumn] = useState<string | null>(null);
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc" | "">("");
 
+  // Handles row click so the ID code could be used in state and URL for article page
   const handleRowClick = (personalCode: number) => {
     setActiveRow((prevActiveRow) => (prevActiveRow === personalCode ? null : personalCode));
   };
 
+  // Cutting the data into amounts of 10
   const paginatedData = data
     ? data.list.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE)
     : [];
 
+  // Reset activeRow when changing pages
   useEffect(() => {
-    // Reset activeRow when changing pages
     setActiveRow(null);
   }, [currentPage]);
 
+  // Sets the state of clicked column and changes the sorting direction based on previous direction
   const handleSort = (column: string) => {
     setSortColumn(column);
-    setSortDirection((prevDirection) => (prevDirection === "asc" ? "desc" : "asc"));
+    setSortDirection((prevDirection) => {
+      if (prevDirection === "asc") return "desc";
+      if (prevDirection === "desc") return "";
+      return "asc";
+    });
   };
 
+  // Sorting or no sorting icon next to the column title
   const sortIndicator = (column: string) => {
     if (sortColumn === column) {
-      return sortDirection === "asc" ? "▲" : "▼";
+      if (sortDirection === "asc") return "▼";
+      if (sortDirection === "desc") return "▲";
+      return "○"; // Circle symbol for default
     }
     return "○";
   };
 
+  console.log(data);
+
+  // Sorting data based on "sortDirection". If "sortDirection" is empty, there is no sorting, data is in the order it is fetched.
   const sortedData = (): Person[] => {
     const dataList = data?.list ?? [];
     if (sortColumn) {
       const sortedList = [...dataList].sort((a, b) => {
         const valueA = a[sortColumn as keyof Person];
         const valueB = b[sortColumn as keyof Person];
+
+        if (sortDirection === "") return 0;
 
         if (sortDirection === "asc") {
           return valueA > valueB ? 1 : -1;
@@ -58,6 +73,7 @@ const TablePage: React.FC = () => {
         }
       });
 
+      // Data destributed on each page
       const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
       const endIndex = startIndex + ITEMS_PER_PAGE;
       return sortedList.slice(startIndex, endIndex);
@@ -75,13 +91,23 @@ const TablePage: React.FC = () => {
         <table className="tablepage">
           <thead className="tablepage__head">
             <tr className="tablepage__row tablepage__head-row">
-              <th onClick={() => handleSort("firstname")}>Eesnimi {sortIndicator("firstname")}</th>
-              <th onClick={() => handleSort("surname")}>
-                Perekonnanimi {sortIndicator("surname")}
+              <th onClick={() => handleSort("firstname")}>
+                <span className="tablepage__head-title">Eesnimi {sortIndicator("firstname")}</span>
               </th>
-              <th onClick={() => handleSort("sex")}>Sugu {sortIndicator("sex")}</th>
-              <th onClick={() => handleSort("date")}>Sünnikuupäev {sortIndicator("date")}</th>
-              <th onClick={() => handleSort("phone")}>Telefon {sortIndicator("phone")}</th>
+              <th onClick={() => handleSort("surname")}>
+                <span className="tablepage__head-title">
+                  Perekonnanimi {sortIndicator("surname")}
+                </span>
+              </th>
+              <th onClick={() => handleSort("sex")}>
+                <span className="tablepage__head-title">Sugu {sortIndicator("sex")}</span>
+              </th>
+              <th onClick={() => handleSort("date")}>
+                <span className="tablepage__head-title">Sünnikuupäev {sortIndicator("date")}</span>
+              </th>
+              <th onClick={() => handleSort("phone")}>
+                <span className="tablepage__head-title">Telefon {sortIndicator("phone")}</span>
+              </th>
             </tr>
           </thead>
           <tbody className="tablepage__body">
@@ -98,6 +124,7 @@ const TablePage: React.FC = () => {
                   <td>{person.surname}</td>
                   <td>{person.sex === "f" ? "naine" : "mees"}</td>
                   <td>{formatIdCodeToDate(person.personal_code.toString())}</td>
+
                   <td>{person.phone.slice(0, 4) + " " + person.phone.slice(4)}</td>
                 </tr>
                 {activeRow === person.personal_code && (
