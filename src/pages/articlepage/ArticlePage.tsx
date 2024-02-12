@@ -7,11 +7,8 @@ import { PersonDetails } from "../../types/dataTypes";
 
 export default function ArticlePage() {
   const { id } = useParams();
-  console.log(id);
   const apiUrl = `https://midaiganes.irw.ee/api/list/${id}`;
   const { data, error } = useApiArticleData<PersonDetails>(apiUrl);
-
-  console.log(data);
 
   if (error) return <p>{error}</p>;
 

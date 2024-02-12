@@ -54,8 +54,6 @@ const TablePage: React.FC = () => {
     return "○";
   };
 
-  console.log(data);
-
   // Sorting data based on "sortDirection". If "sortDirection" is empty, there is no sorting, data is in the order it is fetched.
   const sortedData = (): Person[] => {
     const dataList = data?.list ?? [];
