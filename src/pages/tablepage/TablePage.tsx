@@ -44,7 +44,7 @@ const TablePage: React.FC = () => {
     });
   };
 
-  // Sorting or no sorting icon next to the column title
+  // Sorting icon next to the column title
   const sortIndicator = (column: string) => {
     if (sortColumn === column) {
       if (sortDirection === "asc") return "▼";
@@ -66,6 +66,40 @@ const TablePage: React.FC = () => {
 
         if (sortDirection === "") return 0;
 
+        if (sortColumn === "date") {
+          // Convert personal_code to a string
+          const formattedBirthdayA = formatIdCodeToDate(a.personal_code.toString()) || "";
+          const formattedBirthdayB = formatIdCodeToDate(b.personal_code.toString()) || "";
+
+          // Extract year, month, and day from the formatted birthday string
+          const [dayA, monthA, yearA] = formattedBirthdayA.split(".");
+          const [dayB, monthB, yearB] = formattedBirthdayB.split(".");
+
+          // Compare years
+          if (yearA !== yearB) {
+            return sortDirection === "asc"
+              ? parseInt(yearA) - parseInt(yearB)
+              : parseInt(yearB) - parseInt(yearA);
+          }
+
+          // Compare months
+          if (monthA !== monthB) {
+            return sortDirection === "asc"
+              ? parseInt(monthA) - parseInt(monthB)
+              : parseInt(monthB) - parseInt(monthA);
+          }
+
+          // Compare days
+          return sortDirection === "asc"
+            ? parseInt(dayA) - parseInt(dayB)
+            : parseInt(dayB) - parseInt(dayA);
+        }
+
+        // Flipping the results of gender, data is in english so "F" is before "M", in estonian "mees", is before "naine" alphabetically.
+        if (sortColumn === "sex") {
+          return sortDirection === "asc" ? (valueA > valueB ? -1 : 1) : valueA > valueB ? 1 : -1;
+        }
+
         if (sortDirection === "asc") {
           return valueA > valueB ? 1 : -1;
         } else {
@@ -73,7 +107,7 @@ const TablePage: React.FC = () => {
         }
       });
 
-      // Data destributed on each page
+      // Data distributed on each page
       const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
       const endIndex = startIndex + ITEMS_PER_PAGE;
       return sortedList.slice(startIndex, endIndex);
@@ -84,75 +118,81 @@ const TablePage: React.FC = () => {
 
   return (
     <>
-      <h1>Nimekiri</h1>
+      <h1>NIMEKIRI</h1>
       {!data ? (
         <img src={Loader} alt="Loader" />
       ) : (
-        <table className="tablepage">
-          <thead className="tablepage__head">
-            <tr className="tablepage__row tablepage__head-row">
-              <th onClick={() => handleSort("firstname")}>
-                <span className="tablepage__head-title">Eesnimi {sortIndicator("firstname")}</span>
-              </th>
-              <th onClick={() => handleSort("surname")}>
-                <span className="tablepage__head-title">
-                  Perekonnanimi {sortIndicator("surname")}
-                </span>
-              </th>
-              <th onClick={() => handleSort("sex")}>
-                <span className="tablepage__head-title">Sugu {sortIndicator("sex")}</span>
-              </th>
-              <th onClick={() => handleSort("date")}>
-                <span className="tablepage__head-title">Sünnikuupäev {sortIndicator("date")}</span>
-              </th>
-              <th onClick={() => handleSort("phone")}>
-                <span className="tablepage__head-title">Telefon {sortIndicator("phone")}</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody className="tablepage__body">
-            {sortedData().map((person: Person) => (
-              <React.Fragment key={person.personal_code}>
-                <tr
-                  key={person.personal_code}
-                  className={`tablepage__row tablepage__body-row ${
-                    activeRow === person.personal_code && "tablepage__row--active"
-                  }`}
-                  onClick={() => handleRowClick(person.personal_code)}
-                >
-                  <td>{person.firstname}</td>
-                  <td>{person.surname}</td>
-                  <td>{person.sex === "f" ? "naine" : "mees"}</td>
-                  <td>{formatIdCodeToDate(person.personal_code.toString())}</td>
+        <div className="table-container">
+          <table className="tablepage">
+            <thead className="tablepage__head">
+              <tr className="tablepage__row tablepage__head-row">
+                <th onClick={() => handleSort("firstname")}>
+                  <span className="tablepage__head-title">
+                    Eesnimi {sortIndicator("firstname")}
+                  </span>
+                </th>
+                <th onClick={() => handleSort("surname")}>
+                  <span className="tablepage__head-title">
+                    Perekonnanimi {sortIndicator("surname")}
+                  </span>
+                </th>
+                <th onClick={() => handleSort("sex")}>
+                  <span className="tablepage__head-title">Sugu {sortIndicator("sex")}</span>
+                </th>
+                <th onClick={() => handleSort("date")}>
+                  <span className="tablepage__head-title">
+                    Sünnikuupäev {sortIndicator("date")}
+                  </span>
+                </th>
+                <th onClick={() => handleSort("phone")}>
+                  <span className="tablepage__head-title">Telefon {sortIndicator("phone")}</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody className="tablepage__body">
+              {sortedData().map((person: Person) => (
+                <React.Fragment key={person.personal_code}>
+                  <tr
+                    key={person.personal_code}
+                    className={`tablepage__row tablepage__body-row ${
+                      activeRow === person.personal_code && "tablepage__row--active"
+                    }`}
+                    onClick={() => handleRowClick(person.personal_code)}
+                  >
+                    <td>{person.firstname}</td>
+                    <td>{person.surname}</td>
+                    <td>{person.sex === "f" ? "naine" : "mees"}</td>
+                    <td>{formatIdCodeToDate(person.personal_code.toString())}</td>
 
-                  <td>{person.phone.slice(0, 4) + " " + person.phone.slice(4)}</td>
-                </tr>
-                {activeRow === person.personal_code && (
-                  <tr className="detailed">
-                    <td colSpan={5}>
-                      <div className="detailed__data">
-                        <img
-                          src={person.images[0].small}
-                          alt={person.images[0].alt}
-                          className="detailed__data-image"
-                        />
-                        <div>
-                          <div>{truncateTextWithHTML(person.body, 100)}</div>
-                          <Button
-                            navigateBack={false}
-                            type="rect"
-                            label="Loe rohkem"
-                            id={`${person.id}`}
-                          />
-                        </div>
-                      </div>
-                    </td>
+                    <td>{person.phone.slice(0, 4) + " " + person.phone.slice(4)}</td>
                   </tr>
-                )}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
+                  {activeRow === person.personal_code && (
+                    <tr className="detailed">
+                      <td colSpan={5}>
+                        <div className="detailed__data">
+                          <img
+                            src={person.images[0].small}
+                            alt={person.images[0].alt}
+                            className="detailed__data-image"
+                          />
+                          <div>
+                            <div>{truncateTextWithHTML(person.body, 100)}</div>
+                            <Button
+                              navigateBack={false}
+                              type="rect"
+                              label="Loe rohkem"
+                              id={`${person.id}`}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
       {data && <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} data={data} />}
     </>

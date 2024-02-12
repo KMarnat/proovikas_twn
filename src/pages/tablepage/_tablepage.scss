@@ -37,6 +37,7 @@
       text-align: start;
       padding: 0.625rem 1rem;
       min-width: 10rem;
+      white-space: nowrap;
     }
 
     &--active {
@@ -46,7 +47,12 @@
   }
 }
 
-// Detailed table row
+.table-container {
+  width: 100%;
+  overflow: auto;
+}
+
+// Detailed table row, that opens up when clicking on a row
 .detailed {
   background-color: white;
   width: 100%;
