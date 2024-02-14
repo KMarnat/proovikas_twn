@@ -3,8 +3,26 @@
 
 .pagination {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
   margin-top: 1rem;
+
+  &__number {
+    color: var(--main-white);
+    font-weight: 500;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+
+    &:hover {
+      border: 1px solid var(--main-white);
+    }
+
+    &--active {
+      color: var(--secondary-text-clr);
+      background-color: var(--main-white);
+    }
+  }
 
   h2 {
     margin: 0;
