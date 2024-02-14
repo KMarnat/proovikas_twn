@@ -81,6 +81,11 @@ body {
     right: 0;
     background-image: url("/src/assets/bg-deco-right.svg");
   }
+
+  &__buttons {
+    display: flex;
+    gap: 1rem;
+  }
 }
 
 .loader {
