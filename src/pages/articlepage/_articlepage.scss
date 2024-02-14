@@ -3,6 +3,7 @@
 .articlepage {
   margin: 2rem 0;
   z-index: 10;
+  height: 100%;
 
   h1 {
     text-transform: uppercase;
@@ -10,5 +11,9 @@
 
   &__intro {
     font-weight: 700;
+  }
+
+  .main__buttons {
+    padding-bottom: 3rem;
   }
 }

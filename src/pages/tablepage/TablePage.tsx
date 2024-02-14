@@ -2,7 +2,7 @@ import { useApiTableData } from "../../hooks/useApiTableData";
 import Loader from "../../assets/loader.svg";
 import { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
-import { formatIdCodeToDate, truncateTextWithHTML } from "./../../helpers/helpers";
+import { formatIdCodeToDate, truncateTextWithHTML } from "../../helpers/helpers";
 import React from "react";
 import { Person } from "../../types/dataTypes";
 import Pagination from "../../components/Pagination/Pagination";

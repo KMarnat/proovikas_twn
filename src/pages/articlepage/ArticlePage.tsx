@@ -7,16 +7,15 @@ import { PersonDetails } from "../../types/dataTypes";
 
 export default function ArticlePage() {
   const { id } = useParams();
-  const apiUrl = `https://midaiganes.irw.ee/api/list/${id}`;
+  const defaultId = "972d2b8a"; // If there is no ID, articlepage will use this hardcoded ID
+
+  const apiUrl = `https://midaiganes.irw.ee/api/list/${id || defaultId}`;
   const { data, error } = useApiArticleData<PersonDetails>(apiUrl);
 
   if (error) return <p>{error}</p>;
 
   return (
     <div className="articlepage">
-      <div className="main__buttons">
-        <Button navigateBack={true} type="round" label="&larr;  Tagasi" />
-      </div>
       {!data ? (
         <img src={Loader} alt="Loader" />
       ) : (

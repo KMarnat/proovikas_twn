@@ -2,15 +2,15 @@
 ------------------ */
 .button {
   &-round {
-    color: #fff;
+    color: var(--main-white);
     background-color: #ff57a2;
     border-radius: 2rem;
     padding: 0.25rem 0.5rem;
   }
 
   &-rect {
-    color: #3a3d57;
-    background-color: #14cc76;
+    color: var(--secondary-text-clr);
+    background-color: var(--fancy-text-clr);
     border-bottom: 0.25rem solid #37945c;
     margin: 0 0 16px;
     padding: 0.25em 1.5em;
@@ -23,6 +23,6 @@
 
   &-arrow {
     font-size: 1.5rem;
-    color: white;
+    color: var(--main-white);
   }
 }

@@ -1,0 +1,16 @@
+/* Welcomepage styles
+------------------------ */
+.welcomepage {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  h1 {
+    text-transform: uppercase;
+    color: var(--fancy-text-clr);
+  }
+
+  h2 {
+    margin: 0;
+  }
+}

@@ -26,6 +26,15 @@ $breakpoint-xxlarge: "(max-width: 87.5em)";
 
 /* Global styles
 ---------------------------- */
+:root {
+  --main-text-clr: #fff;
+  --secondary-text-clr: #3a3d57;
+  --fancy-text-clr: #14cc76;
+  --main-bg-clr: #3a3d57;
+  --secondary-bg-clr: #4e5168;
+  --main-white: #fff;
+}
+
 body {
   background-color: #3a3d57;
 }
@@ -34,18 +43,16 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   position: relative;
   width: 100%;
   height: 100vh;
-  padding: 4rem 0.75rem 0;
-  max-width: 55rem;
+  padding: 4rem 0.75rem 0 14.75rem;
+  max-width: 69rem;
   margin: 0 auto;
 
   @media #{$breakpoint-large} {
-    padding: 1rem 0.75rem 0;
-  }
-  @media #{$breakpoint-mobile-landscape} {
-    padding: 0rem 0.75rem 0;
+    padding: 5rem 0.75rem 0;
   }
 
   h1 {
@@ -62,23 +69,17 @@ body {
 
   &__bg-left {
     bottom: 0;
-    left: 0;
+    left: 14rem;
     background-image: url("/src/assets/bg-deco-left.svg");
+
+    @media #{$breakpoint-large} {
+      left: 0;
+    }
   }
   &__bg-right {
     top: 0;
     right: 0;
     background-image: url("/src/assets/bg-deco-right.svg");
-  }
-
-  &__buttons {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-
-    @media #{$breakpoint-mobile-landscape} {
-      margin-bottom: 1rem;
-    }
   }
 }
 

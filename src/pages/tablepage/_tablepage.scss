@@ -19,17 +19,17 @@
       cursor: pointer;
 
       &:nth-of-type(odd) {
-        background-color: #3a3d57;
+        background-color: var(--main-bg-clr);
       }
 
       &:nth-of-type(even) {
-        background-color: #4e5168;
+        background-color: var(--secondary-bg-clr);
       }
     }
   }
 
   &__row {
-    border-bottom: 0.1rem solid #fff;
+    border-bottom: 0.1rem solid var(--main-text-clr);
 
     th,
     td {
@@ -41,8 +41,8 @@
     }
 
     &--active {
-      background-color: #fff !important;
-      color: #333;
+      background-color: var(--main-white) !important;
+      color: var(--secondary-text-clr);
     }
   }
 }
@@ -54,10 +54,10 @@
 
 // Detailed table row, that opens up when clicking on a row
 .detailed {
-  background-color: white;
+  background-color: var(--main-white);
   width: 100%;
   max-height: 10rem;
-  color: #333;
+  color: var(--secondary-text-clr);
 
   &__data {
     display: flex;

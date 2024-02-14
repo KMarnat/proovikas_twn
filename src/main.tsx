@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import ArticlePage from "./pages/articlepage/ArticlePage";
-import TablePage from "./pages/tablepage/TablePage";
+import ArticlePage from "./pages/Articlepage/ArticlePage";
+import TablePage from "./pages/Tablepage/TablePage";
 import App from "./App";
+import Welcomepage from "./pages/Welcomepage/Welcomepage";
 
 const router = createBrowserRouter([
   {
@@ -13,11 +14,15 @@ const router = createBrowserRouter([
     children: [
       {
         index: true, // Set /article as the default route
-        element: <TablePage />,
+        element: <Welcomepage />,
       },
       {
         path: "/table",
         element: <TablePage />,
+      },
+      {
+        path: "/article",
+        element: <ArticlePage />,
       },
       {
         path: "/article/:id",
